@@ -2,7 +2,7 @@ import { GetStaticPaths, GetStaticPathsResult, GetStaticPropsResult } from 'next
 import Head from 'next/head';
 import Date from '../../components/Date';
 import Layout from '../../components/Layout';
-import { getAllPostIds, getPostData, Post } from '../../lib/posts';
+import { getAllPostIds, getPostData, IPost } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
 
 export default function Post({ postData }) {
@@ -30,7 +30,7 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     };
 }
 
-export async function getStaticProps({ params }): Promise<GetStaticPropsResult<{ postData: Post }>> {
+export async function getStaticProps({ params }): Promise<GetStaticPropsResult<{ postData: IPost }>> {
     const postData = await getPostData(params.id);
     return {
         props: {

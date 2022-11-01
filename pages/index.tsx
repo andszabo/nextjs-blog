@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import Layout, { siteTitle } from '../components/Layout';
 import utilStyles from '../styles/utils.module.css';
-import { getSortedPostsData, Post } from '../lib/posts';
+import { getSortedPostsData, IPost } from '../lib/posts';
 import Date from '../components/Date';
 
 export async function getStaticProps() {
@@ -15,7 +15,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ allPostsData }: { allPostsData: Post[] }) {
+export default function Home({ allPostsData }: { allPostsData: IPost[] }) {
   return (
     <Layout home>
       <Head>

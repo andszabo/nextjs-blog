@@ -6,7 +6,7 @@ import html from 'remark-html';
 
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-export interface Post {
+export interface IPost {
     id: string,
     title: string,
     date: string,
@@ -37,7 +37,7 @@ export function getAllPostIds(): { params: { id: string } }[] {
     });
 }
 
-export async function getPostData(id: string): Promise<Post> {
+export async function getPostData(id: string): Promise<IPost> {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -55,13 +55,13 @@ export async function getPostData(id: string): Promise<Post> {
         id,
         contentHtml,
         ...matterResult.data,
-    } as Post;
+    } as IPost;
 }
 
 export function getSortedPostsData() {
     // Get file names under /posts
     const fileNames = fs.readdirSync(postsDirectory);
-    const allPostsData: Post[] = fileNames.map((fileName) => {
+    const allPostsData: IPost[] = fileNames.map((fileName) => {
         // Remove ".md" from file name to get id
         const id = fileName.replace(/\.md$/, '');
 
@@ -76,7 +76,7 @@ export function getSortedPostsData() {
         const post = {
             id,
             ...matterResult.data,
-        } as Post;
+        } as IPost;
         return post;
     });
     // Sort posts by date
